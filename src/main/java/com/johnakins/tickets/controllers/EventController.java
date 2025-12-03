@@ -6,16 +6,14 @@ import com.johnakins.tickets.domain.dtos.CreateEvent.CreateEventResponseDto;
 import com.johnakins.tickets.domain.entity.Event;
 import com.johnakins.tickets.mappers.EventMapper;
 import com.johnakins.tickets.services.EventService;
+import com.johnakins.tickets.utils.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -26,14 +24,19 @@ public class EventController {
 
     private final EventService eventService;
     private final EventMapper eventMapper;
+    private final JwtUtil jwtUtil;
 
     @PostMapping
     public ResponseEntity<CreateEventResponseDto> createEvent(
-            @AuthenticationPrincipal Jwt jwt,
+            @RequestHeader("Authorization") String authHeader,
             @Valid @RequestBody CreateEventRequestDto createEventRequestDto){
+
         CreateEventRequest createEventRequest = eventMapper.fromDto(createEventRequestDto);
-        UUID userId = UUID.fromString(jwt.getSubject());
-        Event createdEvent = eventService.createEvent(userId, createEventRequest);
+        //TODO: how to get the organizer Id
+        //UUID userId = UUID.fromString(jwt.getSubject());
+        String token = authHeader.substring(7);
+        UUID organizerId = jwtUtil.getUserIdFromToken(token);
+        Event createdEvent = eventService.createEvent(organizerId , createEventRequest);
 
         //Response object dto
         CreateEventResponseDto createEventResponseDto = eventMapper.toDto(createdEvent);

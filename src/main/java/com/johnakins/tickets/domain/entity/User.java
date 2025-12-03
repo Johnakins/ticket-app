@@ -1,5 +1,6 @@
 package com.johnakins.tickets.domain.entity;
 
+import com.johnakins.tickets.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,6 +29,12 @@ public class User {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     // TODO: Organized events
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
