@@ -1,4 +1,4 @@
-package com.johnakins.tickets.domain.dtos.CreateTicketType;
+package com.johnakins.tickets.domain.dtos.createTicketType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

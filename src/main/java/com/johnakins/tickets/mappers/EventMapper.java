@@ -1,15 +1,12 @@
 package com.johnakins.tickets.mappers;
 
-import com.johnakins.tickets.domain.dtos.CreateEvent.CreateEventRequest;
-import com.johnakins.tickets.domain.dtos.CreateEvent.CreateEventRequestDto;
-import com.johnakins.tickets.domain.dtos.CreateEvent.CreateEventResponseDto;
-import com.johnakins.tickets.domain.dtos.CreateTicketType.CreateTicketTypeRequest;
-import com.johnakins.tickets.domain.dtos.CreateTicketType.CreateTicketTypeRequestDto;
-import com.johnakins.tickets.domain.dtos.CreateTicketType.CreateTicketTypeResponseDto;
+import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequest;
+import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequestDto;
+import com.johnakins.tickets.domain.dtos.createEvent.CreateEventResponseDto;
+import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeRequest;
+import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeResponseDto;
 import com.johnakins.tickets.domain.entity.Event;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class EventMapper {

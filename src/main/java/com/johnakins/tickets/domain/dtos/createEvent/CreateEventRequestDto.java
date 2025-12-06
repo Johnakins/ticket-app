@@ -1,6 +1,6 @@
-package com.johnakins.tickets.domain.dtos.CreateEvent;
+package com.johnakins.tickets.domain.dtos.createEvent;
 
-import com.johnakins.tickets.domain.dtos.CreateTicketType.CreateTicketTypeRequestDto;
+import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeRequestDto;
 import com.johnakins.tickets.domain.enums.EventStatusEnum;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
