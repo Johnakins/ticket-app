@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,17 +32,19 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String header = request.getHeader("Authorization");
+
         if (StringUtils.hasText(header) && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             if (jwtUtil.validateToken(token)) {
                 UUID userId  = jwtUtil.getUserIdFromToken(token);
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
-                List authorities = userDetails.getAuthorities().stream().map(
-                        auth -> auth)
-                                .collect(Collectors.toList());
+
+                String role = jwtUtil.getRoleFromToken(token);
+                SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
 
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, authorities);
+                        userDetails, null, List.of(authority));
+
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }

@@ -1,14 +1,16 @@
-package com.johnakins.tickets.domain.dtos.createTicketType;
+package com.johnakins.tickets.domain.dtos.updateTicketType;
 
 import lombok.*;
 
-@Data
+import java.util.UUID;
+
 @Getter
 @Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateTicketTypeRequest {
-
+public class UpdateTicketTypeRequest {
+    private UUID id;
     private String name;
     private Double price;
     private String description;

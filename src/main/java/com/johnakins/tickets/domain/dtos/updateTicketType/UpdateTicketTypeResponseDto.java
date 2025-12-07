@@ -1,4 +1,4 @@
-package com.johnakins.tickets.domain.dtos.createTicketType;
+package com.johnakins.tickets.domain.dtos.updateTicketType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CreateTicketTypeResponseDto {
+public class UpdateTicketTypeResponseDto {
 
     private UUID id;
     private String name;

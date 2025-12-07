@@ -1,6 +1,7 @@
-package com.johnakins.tickets.domain.dtos.createEvent;
+package com.johnakins.tickets.domain.dtos.updateEvent;
 
 import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeResponseDto;
+import com.johnakins.tickets.domain.dtos.updateTicketType.UpdateTicketTypeResponseDto;
 import com.johnakins.tickets.domain.enums.EventStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CreateEventResponseDto {
+public class UpdateEventResponseDto {
 
     private UUID id;
     private String name;
@@ -23,7 +24,7 @@ public class CreateEventResponseDto {
     private LocalDateTime salesStart;
     private LocalDateTime salesEnd;
     private EventStatusEnum status;
-    private List<CreateTicketTypeResponseDto> ticketTypes;
+    private List<UpdateTicketTypeResponseDto> ticketTypes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

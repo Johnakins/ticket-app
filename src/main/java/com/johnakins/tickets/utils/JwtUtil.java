@@ -23,10 +23,14 @@ public class JwtUtil {
     }
 
     public String generateToken(UUID userId, String role) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId.toString());
+        claims.put("role", role);
+
         return Jwts.builder()
-                .claim("role",role)
-                .setSubject(String.valueOf(userId))
-                .setIssuedAt(new Date())
+                .setClaims(claims)
+                .setSubject(userId.toString())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();

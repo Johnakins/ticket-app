@@ -41,14 +41,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers( "/api/users/**", "/api/v1/events/**").permitAll()
+                    .requestMatchers( "/api/users/**" ).permitAll()
                     .requestMatchers("/api/v1/published_events/**").hasRole("ATTENDEE")
                     .requestMatchers("/api/staff/**").hasRole("STAFF")
-                    //.requestMatchers("/api/v1/events/**").hasRole("ORGANIZER")
+                    .requestMatchers("/api/v1/events/**").hasAuthority("ORGANIZER")
                     .anyRequest().authenticated())
-//                .exceptionHandling(ex -> ex
-//                        .authenticationEntryPoint(jwtAuthEntryPoint)
-//                        .accessDeniedHandler(jwtAccessDeniedHandler))
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(jwtAuthEntryPoint)
+                        .accessDeniedHandler(jwtAccessDeniedHandler))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
