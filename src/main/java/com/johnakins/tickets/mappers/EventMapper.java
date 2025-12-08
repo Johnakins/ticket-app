@@ -1,10 +1,9 @@
 package com.johnakins.tickets.mappers;
 
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequest;
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequestDto;
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventResponseDto;
+import com.johnakins.tickets.domain.dtos.createEvent.*;
 import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeRequest;
 import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeResponseDto;
+import com.johnakins.tickets.domain.dtos.createTicketType.GetPublishedTicketTypeResponseDto;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventRequest;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventRequestDto;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventResponseDto;
@@ -117,6 +116,35 @@ public class EventMapper {
                         )).toList(),
                 event.getCreatedAt(),
                 event.getUpdatedAt()
+        );
+    }
+
+    public ListPublishedEventResponseDto toPublishedDto(Event event){
+        if (event == null) return null;
+        return  new ListPublishedEventResponseDto(
+                event.getId(),
+                event.getName(),
+                event.getStart(),
+                event.getEnd(),
+                event.getVenue()
+        );
+    }
+
+    public GetPublishedEventResponseDto toGetPublishedDto(Event event){
+        if (event == null) return null;
+        return  new GetPublishedEventResponseDto(
+                event.getId(),
+                event.getName(),
+                event.getStart(),
+                event.getEnd(),
+                event.getVenue(),
+                event.getTicketTypes()
+                        .stream().map(t -> new GetPublishedTicketTypeResponseDto(
+                                t.getId(),
+                                t.getName(),
+                                t.getPrice(),
+                                t.getDescription()
+                        )).toList()
         );
     }
 }
