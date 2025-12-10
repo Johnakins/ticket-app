@@ -30,12 +30,12 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private TicketStatusEnum status;
 
-    //a ticket_type can have many tickets
+    //a ticket_type can have many ticket_types
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_type_id")
     private TicketType ticketType;
 
-    //a purchaser can buy many ticket_type
+    //a purchaser can buy many tickets
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchaser_id")
     private User purchaser;
