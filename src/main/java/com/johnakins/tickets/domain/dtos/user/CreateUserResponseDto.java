@@ -1,4 +1,4 @@
-package com.johnakins.tickets.domain.dtos.createUser;
+package com.johnakins.tickets.domain.dtos.user;
 
 import com.johnakins.tickets.domain.enums.Role;
 import lombok.AllArgsConstructor;

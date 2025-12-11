@@ -1,4 +1,4 @@
-package com.johnakins.tickets.domain.dtos.createEvent;
+package com.johnakins.tickets.domain.dtos.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

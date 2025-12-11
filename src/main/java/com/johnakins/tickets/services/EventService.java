@@ -1,6 +1,6 @@
 package com.johnakins.tickets.services;
 
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequest;
+import com.johnakins.tickets.domain.dtos.event.CreateEventRequest;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventRequest;
 import com.johnakins.tickets.domain.entity.Event;
 import org.springframework.data.domain.Page;

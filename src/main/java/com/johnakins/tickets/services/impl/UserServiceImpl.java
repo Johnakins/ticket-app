@@ -1,8 +1,8 @@
 package com.johnakins.tickets.services.impl;
 
-import com.johnakins.tickets.domain.dtos.createUser.CreateUserRequestDto;
-import com.johnakins.tickets.domain.dtos.createUser.CreateUserResponseDto;
-import com.johnakins.tickets.domain.dtos.createUser.LoginDto;
+import com.johnakins.tickets.domain.dtos.user.CreateUserRequestDto;
+import com.johnakins.tickets.domain.dtos.user.CreateUserResponseDto;
+import com.johnakins.tickets.domain.dtos.user.LoginDto;
 import com.johnakins.tickets.domain.entity.User;
 import com.johnakins.tickets.mappers.UserMapper;
 import com.johnakins.tickets.repositories.UserRepository;

@@ -1,4 +1,4 @@
-package com.johnakins.tickets.domain.dtos.createEvent;
+package com.johnakins.tickets.domain.dtos.event;
 
 import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeRequestDto;
 import com.johnakins.tickets.domain.enums.EventStatusEnum;

@@ -1,13 +1,12 @@
 package com.johnakins.tickets.controllers;
 
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequest;
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequestDto;
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventResponseDto;
+import com.johnakins.tickets.domain.dtos.event.CreateEventRequest;
+import com.johnakins.tickets.domain.dtos.event.CreateEventRequestDto;
+import com.johnakins.tickets.domain.dtos.event.CreateEventResponseDto;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventRequest;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventRequestDto;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventResponseDto;
 import com.johnakins.tickets.domain.entity.Event;
-import com.johnakins.tickets.exceptions.eventTicketExceptions.EventNotFoundException;
 import com.johnakins.tickets.mappers.EventMapper;
 import com.johnakins.tickets.services.EventService;
 import com.johnakins.tickets.utils.JwtUtil;
@@ -19,8 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

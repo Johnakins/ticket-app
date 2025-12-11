@@ -1,8 +1,8 @@
 package com.johnakins.tickets.services;
 
-import com.johnakins.tickets.domain.dtos.createUser.CreateUserRequestDto;
-import com.johnakins.tickets.domain.dtos.createUser.CreateUserResponseDto;
-import com.johnakins.tickets.domain.dtos.createUser.LoginDto;
+import com.johnakins.tickets.domain.dtos.user.CreateUserRequestDto;
+import com.johnakins.tickets.domain.dtos.user.CreateUserResponseDto;
+import com.johnakins.tickets.domain.dtos.user.LoginDto;
 
 import java.util.List;
 import java.util.UUID;

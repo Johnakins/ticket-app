@@ -1,6 +1,6 @@
 package com.johnakins.tickets.mappers;
 
-import com.johnakins.tickets.domain.dtos.createUser.CreateUserResponseDto;
+import com.johnakins.tickets.domain.dtos.user.CreateUserResponseDto;
 import com.johnakins.tickets.domain.entity.User;
 import org.springframework.stereotype.Component;
 

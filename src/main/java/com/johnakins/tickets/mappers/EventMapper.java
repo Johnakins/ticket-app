@@ -1,6 +1,6 @@
 package com.johnakins.tickets.mappers;
 
-import com.johnakins.tickets.domain.dtos.createEvent.*;
+import com.johnakins.tickets.domain.dtos.event.*;
 import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeRequest;
 import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeResponseDto;
 import com.johnakins.tickets.domain.dtos.createTicketType.GetPublishedTicketTypeResponseDto;

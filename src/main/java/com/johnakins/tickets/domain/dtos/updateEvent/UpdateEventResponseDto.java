@@ -1,6 +1,5 @@
 package com.johnakins.tickets.domain.dtos.updateEvent;
 
-import com.johnakins.tickets.domain.dtos.createTicketType.CreateTicketTypeResponseDto;
 import com.johnakins.tickets.domain.dtos.updateTicketType.UpdateTicketTypeResponseDto;
 import com.johnakins.tickets.domain.enums.EventStatusEnum;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.johnakins.tickets.services.impl;
 
-import com.johnakins.tickets.domain.dtos.createEvent.CreateEventRequest;
+import com.johnakins.tickets.domain.dtos.event.CreateEventRequest;
 import com.johnakins.tickets.domain.dtos.updateEvent.UpdateEventRequest;
 import com.johnakins.tickets.domain.dtos.updateTicketType.UpdateTicketTypeRequest;
 import com.johnakins.tickets.domain.entity.Event;

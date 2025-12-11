@@ -1,8 +1,8 @@
 package com.johnakins.tickets.controllers;
 
 
-import com.johnakins.tickets.domain.dtos.createEvent.GetPublishedEventResponseDto;
-import com.johnakins.tickets.domain.dtos.createEvent.ListPublishedEventResponseDto;
+import com.johnakins.tickets.domain.dtos.event.GetPublishedEventResponseDto;
+import com.johnakins.tickets.domain.dtos.event.ListPublishedEventResponseDto;
 import com.johnakins.tickets.domain.entity.Event;
 import com.johnakins.tickets.mappers.EventMapper;
 import com.johnakins.tickets.services.EventService;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
