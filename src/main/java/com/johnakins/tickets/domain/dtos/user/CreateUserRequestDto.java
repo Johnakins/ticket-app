@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequestDto {
-    @NotBlank(message = "Name is required")
-    private String name;
+//    @NotBlank(message = "Name is required")
+//    private String name;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be valid")

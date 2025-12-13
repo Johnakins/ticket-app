@@ -73,12 +73,17 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public Event updateEventForOrganizer(UUID organizerId, UUID id, UpdateEventRequest event) {
-        if(null == event.getId())
+    public Event updateEventForOrganizer(
+            UUID organizerId,
+            UUID id,
+            UpdateEventRequest event
+    ) {
+        if (event.getId() == null || !event.getId().equals(id)) {
             throw new UpdateEventException(id);
-        if(!id.equals(event.getId()))
-            throw new UpdateEventException(id);
-        Event existingEvent = eventRepository.findByIdAndOrganizerId(id,organizerId)
+        }
+
+        Event existingEvent = eventRepository
+                .findByIdAndOrganizerId(id, organizerId)
                 .orElseThrow(() -> new EventNotFoundException(id));
 
         existingEvent.setName(event.getName());
@@ -89,40 +94,53 @@ public class EventServiceImpl implements EventService {
         existingEvent.setSalesEnd(event.getSalesEnd());
         existingEvent.setStatus(event.getStatus());
 
+        // IDs sent in request
         Set<UUID> requestTicketTypeIds = event.getTicketTypes().stream()
                 .map(UpdateTicketTypeRequest::getId)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
-        Map<UUID, TicketType> existingTicketTypesIndex = existingEvent.getTicketTypes().stream()
-                .collect(Collectors.toMap(TicketType::getId, Function.identity()));
+        // Index existing ticket types
+        Map<UUID, TicketType> existingTicketTypesIndex =
+                existingEvent.getTicketTypes().stream()
+                        .collect(Collectors.toMap(TicketType::getId, Function.identity()));
+
+        // Remove deleted ticket types
+        existingEvent.getTicketTypes().removeIf(
+                ticketType -> ticketType.getId() != null
+                        && !requestTicketTypeIds.contains(ticketType.getId())
+        );
 
         for (UpdateTicketTypeRequest ticketType : event.getTicketTypes()) {
-            if (null == ticketType.getId()) {
+            if (ticketType.getId() == null) {
                 // Create
-                TicketType ticketTypeToCreate = new TicketType();
-                ticketTypeToCreate.setName(ticketType.getName());
-                ticketTypeToCreate.setPrice(ticketType.getPrice());
-                ticketTypeToCreate.setDescription(ticketType.getDescription());
-                ticketTypeToCreate.setTotalAvailable(ticketType.getTotalAvailable());
-                ticketTypeToCreate.setEvent(existingEvent);
-                existingEvent.getTicketTypes().add(ticketTypeToCreate);
+                TicketType newTicketType = new TicketType();
+                newTicketType.setName(ticketType.getName());
+                newTicketType.setPrice(ticketType.getPrice());
+                newTicketType.setDescription(ticketType.getDescription());
+                newTicketType.setTotalAvailable(ticketType.getTotalAvailable());
+                newTicketType.setEvent(existingEvent);
 
-            } else if (existingTicketTypesIndex.containsKey(ticketType.getId())) {
+                existingEvent.getTicketTypes().add(newTicketType);
+            } else {
                 // Update
-                TicketType existingTicketType = existingTicketTypesIndex.get(ticketType.getId());
+                TicketType existingTicketType =
+                        existingTicketTypesIndex.get(ticketType.getId());
+
+                if (existingTicketType == null) {
+                    throw new TicketTypeNotFoundException(ticketType.getId());
+                }
+
                 existingTicketType.setName(ticketType.getName());
                 existingTicketType.setPrice(ticketType.getPrice());
                 existingTicketType.setDescription(ticketType.getDescription());
                 existingTicketType.setTotalAvailable(ticketType.getTotalAvailable());
-            } else {
-                throw new TicketTypeNotFoundException(ticketType.getId());
             }
         }
 
-        return eventRepository.save(existingEvent);
-
+        return existingEvent; // save not required if JPA dirty checking
     }
+
 
     @Override
     public void deleteEventForOrganizer(UUID organizerId, UUID id) {

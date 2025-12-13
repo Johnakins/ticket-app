@@ -44,7 +44,7 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createEventResponseDto);
     }
 
-    @PutMapping
+    @PutMapping("/{eventId}")
     public ResponseEntity<UpdateEventResponseDto> updateEvent(
             @RequestHeader("Authorization") String authHeader,
             @PathVariable UUID eventId,

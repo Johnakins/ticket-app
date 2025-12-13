@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public CreateUserResponseDto createUser(CreateUserRequestDto request) {
         User user = new User();
-        user.setName(request.getName());
+        //user.setName(request.getName());
         user.setEmail(request.getEmail());
 
         // Encode password before saving
@@ -43,16 +43,16 @@ public class UserServiceImpl implements UserService {
     }
 
     public String loginUser(LoginDto request){
-        String username = request.getName();
+        String email = request.getEmail();
         String password = request.getPassword();
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
 
-        User user = userRepository.findByName(username).orElseThrow();
+        User user = userRepository.findByEmail(email).orElseThrow();
         UUID userId = user.getId();
         //List<String> roleNames = user.getRoles().stream().map(Role::getName).collect(Collectors.toList());
         String role = user.getRole().toString();
-        return jwtUtil.generateToken(userId, role);
+        return jwtUtil.generateToken(userId, role, email);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        user.setName(request.getName());
+        //user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setRole(request.getRole());
 

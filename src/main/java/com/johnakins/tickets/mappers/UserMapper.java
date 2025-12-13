@@ -10,7 +10,7 @@ public class UserMapper {
     public CreateUserResponseDto toDto(User user) {
         CreateUserResponseDto dto = new CreateUserResponseDto();
         dto.setId(user.getId());
-        dto.setName(user.getName());
+        //dto.setName(user.getName());
         dto.setEmail(user.getEmail());
         dto.setRole(user.getRole());
         dto.setCreatedAt(user.getCreatedAt());

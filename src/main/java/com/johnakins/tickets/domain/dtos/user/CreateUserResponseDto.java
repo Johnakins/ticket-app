@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CreateUserResponseDto {
     private UUID id;
-    private String name;
+    //private String name;
     private String email;
     private Role role;
 

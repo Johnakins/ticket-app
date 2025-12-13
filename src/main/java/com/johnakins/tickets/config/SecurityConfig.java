@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers( "/api/users/**" , "/api/v1/published-events/**").permitAll()
+                    .requestMatchers( "/api/v1/users/**" , "/api/v1/published-events/**").permitAll()
                     .requestMatchers("/api/v1/published_events/**").hasRole("ATTENDEE")
                     .requestMatchers("/api/staff/**").hasRole("STAFF")
                     .requestMatchers("/api/v1/events/**").hasAuthority("ORGANIZER")
