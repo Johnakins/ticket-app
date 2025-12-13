@@ -13,6 +13,8 @@ import com.johnakins.tickets.repositories.QrCodeRepository;
 import com.johnakins.tickets.services.QrCodeService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -25,6 +27,7 @@ import java.util.UUID;
 @Service
 public class QrCodeServiceImpl implements QrCodeService {
 
+    private static final Logger log = LoggerFactory.getLogger(QrCodeServiceImpl.class);
     private final QRCodeWriter qrCodeWriter;
     private QrCodeRepository qrCodeRepository;
     private static final int QR_HEIGHT = 300;
@@ -45,6 +48,18 @@ public class QrCodeServiceImpl implements QrCodeService {
             return qrCodeRepository.saveAndFlush(qrCode);
         } catch (IOException | WriterException ex){
             throw new QrCodeGenerationException(ex);
+        }
+    }
+
+    @Override
+    public byte[] getQrCodeImageForUserAndTicket(UUID userId, UUID ticketId) {
+        QrCode qrCode = qrCodeRepository.findByTicketIdAndTicketPurchaseId(ticketId, userId)
+                .orElseThrow(QrCodeGenerationException::new);
+        try {
+            return Base64.getDecoder().decode(qrCode.getValue());
+        } catch (IllegalArgumentException ex) {
+            log.error("Invalid base64 QR Code for ticket ID: {}", ticketId, ex);
+            throw new QrCodeGenerationException();
         }
     }
 

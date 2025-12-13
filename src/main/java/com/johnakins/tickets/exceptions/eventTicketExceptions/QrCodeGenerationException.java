@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public class QrCodeGenerationException extends EventTicketException {
 
-    public QrCodeGenerationException(UUID id) {
-        super("Ticket with ID" + id + "can not be found",
+    public QrCodeGenerationException() {
+        super("Ticket with ID can not be found",
                 HttpStatus.NOT_FOUND);
     }
     public QrCodeGenerationException(Exception ex) {

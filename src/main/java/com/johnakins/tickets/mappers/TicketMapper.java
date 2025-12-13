@@ -1,5 +1,6 @@
 package com.johnakins.tickets.mappers;
 
+import com.johnakins.tickets.domain.dtos.ticket.GetTicketResponseDto;
 import com.johnakins.tickets.domain.dtos.ticket.ListTicketResponseDto;
 import com.johnakins.tickets.domain.dtos.updateTicketType.ListTicketTicketTypeResponseDto;
 import com.johnakins.tickets.domain.entity.Ticket;
@@ -21,6 +22,19 @@ public class TicketMapper {
                 ticket.getId(),
                 ticket.getStatus(),
                 tolistTicketTicketTypeResponseDto(ticket.getTicketType())
+        );
+    }
+
+    public GetTicketResponseDto toGetTicketResponseDto(Ticket ticket){
+        return  new GetTicketResponseDto(
+                ticket.getId(),
+                ticket.getStatus(),
+                ticket.getTicketType().getPrice(),
+                ticket.getTicketType().getDescription(),
+                ticket.getTicketType().getEvent().getName(),
+                ticket.getTicketType().getEvent().getVenue(),
+                ticket.getTicketType().getEvent().getStart(),
+                ticket.getTicketType().getEvent().getEnd()
         );
     }
 }
